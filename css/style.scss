@@ -1,0 +1,93 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+$page-background: #2B2B2B;
+$shape-background: #EF4100;
+$shape-widthHeight: 100px;
+$child-widthHeight: 60px;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin rounded-border {
+    border: 5px solid $shape-background;
+    border-radius: 50%;
+}
+
+.wrapper {
+    background-color: $page-background;
+    height: 100vh;
+    @include flex-center;
+
+    .shape {
+        position: relative;
+        width: $shape-widthHeight;
+        height: $shape-widthHeight;
+        @include rounded-border;
+        overflow: hidden;
+
+        @media (max-width: 768px) {
+            width: $shape-widthHeight * 0.8; 
+            height: $shape-widthHeight * 0.8;
+        }
+    
+        &::after,
+        &::before {
+            content: "";
+            position: absolute;
+            @include rounded-border;
+            width: $child-widthHeight;
+            height: $child-widthHeight;
+
+            @media (max-width: 768px) {
+                width: $child-widthHeight * 0.8; 
+                height: $child-widthHeight * 0.8;
+            }
+        }
+        &::after {
+            left: 45%;
+            top: -5%;
+        }
+        &::before {
+            right: 45%;
+            bottom: -5%;
+        }
+    }
+
+    .child {
+        &::after,
+        &::before {
+            content: "";
+            position: absolute;
+            @include rounded-border;
+            width: $child-widthHeight;
+            height: $child-widthHeight;
+
+            @media (max-width: 768px) {
+                width: $child-widthHeight * 0.8; 
+                height: $child-widthHeight * 0.8;
+            }
+        }
+        &::after {
+            bottom: -21%;
+            right: -5%;
+
+            @media (max-width: 768px) {
+                bottom: -27%;
+            }
+        }
+        &::before {
+            top: -21%;
+            left: -5%;
+
+            @media (max-width: 768px) {
+                top: -27%;
+            }
+        }
+    }
+}
